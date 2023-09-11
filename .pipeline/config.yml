@@ -4,7 +4,7 @@ service:
   stages:
     Build:
       runFirst:
-        command: "cd helloWorld && npm install && npm hello-world.js"
+        command: "npm install"
     Release:
       cloudFoundryDeploy: false # true, if you want to deploy to Cloud Foundry (default: false)
       cfApiEndpoint: "<your SAP BTP, Cloud Foundry environment APIendpoint>"
