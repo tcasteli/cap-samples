@@ -1,0 +1,13 @@
+general:
+  buildTool: "mta" 
+service:
+  stages:
+    Build:
+      runFirst:
+        command: "cd helloWorld && npm install && npm hello-world.js"
+    Release:
+      cloudFoundryDeploy: false # true, if you want to deploy to Cloud Foundry (default: false)
+      cfApiEndpoint: "<your SAP BTP, Cloud Foundry environment APIendpoint>"
+      cfOrg: "<name of your Cloud Foundry organization>"
+      cfSpace: "<name of your Cloud Foundry space>"
+      cfAppName: "<name of your application>" 
