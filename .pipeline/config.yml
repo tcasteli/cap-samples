@@ -1,20 +1,28 @@
 general:
-  buildTool: "mta" 
+  buildTool: "mta"
 service:
-  stages:
-    Build:
-      npmExecuteLint: true
-      runFirst:
-        command: "npm install"
-    Additional Unit Tests:
-      npmExecuteScripts: false 
-    Release:
-      cloudFoundryDeploy: false # true, if you want to deploy to Cloud Foundry (default: false)
-      cfApiEndpoint: "<your SAP BTP, Cloud Foundry environment APIendpoint >"
-      cfOrg: "<name of your Cloud Foundry organization>"
-      cfSpace: "<name of your Cloud Foundry space>"
-      cfAppName: "<name of your application>" 
+  buildToolVersion: "MBTJ11N18"
+stages:
+  Build:
+    mavenExecuteStaticCodeChecks: false
+    npmExecuteLint: true
+  Additional Unit Tests:
+    npmExecuteScripts: true
+  Acceptance:
+    cloudFoundryDeploy: false
+    npmExecuteEndToEndTests: false
+  Compliance:
+    sonarExecuteScan: false
+  Release:
+    cloudFoundryDeploy: false
+    tmsUpload: false
 steps:
-  npmExecuteScripts: #only relevant, if you set the npmExecuteScripts parameter in the Additional Unit Tests stage to true
+  artifactPrepareVersion:
+    versioningType: "cloud_noTag"
+  npmExecuteLint:
+    failOnError: false
+  npmExecuteScripts:
     runScripts:
-    - "test" 
+    - "test"
+  cloudFoundryDeploy:
+    mtaDeployParameters: "-f --version-rule ALL"
