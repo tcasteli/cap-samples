@@ -1,56 +1,61 @@
 {
-  "name": "@capire/samples",
-  "version": "2.0.0",
-  "description": "A monorepo with several samples for CAP.",
-  "repository": "https://github.com/sap-samples/cloud-cap-samples.git",
-  "author": "daniel.hutzel@sap.com",
+  "name": "reactathon",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
   "dependencies": {
-    "@sap/cds": ">=7",
-    "sqlite3": "^5.1.6"
+    "@sap/cds": "^5",
+    "axios": "^0.27.2",
+    "express": "^4",
+    "hdb": "^0.18.3"
   },
-  "workspaces": [
-    "./bookshop",
-    "./bookstore",
-    "./common",
-    "./data-viewer",
-    "./fiori",
-    "./hello",
-    "./media",
-    "./orders",
-    "./loggers",
-    "./reviews"
-  ],
   "devDependencies": {
-    "@sap/eslint-plugin-cds": "^2.6.1",
-    "axios": "^1",
-    "chai": "^4.3.4",
-    "chai-as-promised": "^7.1.1",
-    "chai-subset": "^1.6.0",
-    "semver": "^7"
+    "concurrently": "^7.3.0",
+    "sqlite3": "^5.0.11"
   },
   "scripts": {
-    "cleanup": "rm -rf node_modules && rm -rf */node_modules && rm -rf */*/node_modules",
-    "bookshop": "cds watch bookshop",
-    "fiori": "cds watch fiori",
-    "hello": "cds watch hello",
-    "media": "cds watch media",
-    "mocha": "CDS_TEST_SILENT=y npx mocha",
-    "jest": "npx jest --silent",
-    "start": "cds watch fiori",
-    "test": "npm run jest -- --silent",
-    "test:hello": "cd hello && npm test"
+    "start": "cds run",
+    "watch": "cds watch",
+    "web": "npm start --prefix web",
+    "approuter": "npm start --prefix approuter",
+    "dev": "concurrently \"npm start\" \"npm run approuter\" \"npm run web\"",
+    "postinstall": "(cd approuter && npm install); (cd web && npm install)"
   },
-  "jest": {
-    "testTimeout": 20000,
-    "testMatch": [
-      "**/*.test.js"
-    ]
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
   },
-  "mocha": {
-    "recursive": true,
-    "parallel": true,
-    "timeout": 6666
-  },
-  "license": "SEE LICENSE IN LICENSE",
-  "private": true
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sql"
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    }
+  }
 }
