@@ -5,7 +5,8 @@
   "repository": "https://github.com/sap-samples/cloud-cap-samples.git",
   "author": "daniel.hutzel@sap.com",
   "dependencies": {
-    "@sap/cds": ">=7"
+    "@sap/cds": ">=7",
+    "sqlite3": "^5.1.6"
   },
   "workspaces": [
     "./bookshop",
@@ -25,8 +26,7 @@
     "chai": "^4.3.4",
     "chai-as-promised": "^7.1.1",
     "chai-subset": "^1.6.0",
-    "semver": "^7",
-    "sqlite3": "^5"
+    "semver": "^7"
   },
   "scripts": {
     "cleanup": "rm -rf node_modules && rm -rf */node_modules && rm -rf */*/node_modules",
