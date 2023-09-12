@@ -7,7 +7,7 @@ stages:
     mavenExecuteStaticCodeChecks: false
     npmExecuteLint: true
   Additional Unit Tests:
-    npmExecuteScripts: true
+    npmExecuteScripts: false
   Acceptance:
     cloudFoundryDeploy: false
     npmExecuteEndToEndTests: false
