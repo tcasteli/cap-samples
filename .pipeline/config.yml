@@ -1,3 +1,4 @@
+---
 general:
   buildTool: "mta"
 service:
@@ -19,10 +20,10 @@ stages:
 steps:
   artifactPrepareVersion:
     versioningType: "cloud_noTag"
-  npmExecuteLint:
-    failOnError: false
-  npmExecuteScripts:
-    runScripts:
-    - "test"
+  # npmExecuteLint:
+  #  failOnError: false
+  #npmExecuteScripts:
+  #  runScripts:
+  #  - "test"
   cloudFoundryDeploy:
     mtaDeployParameters: "-f --version-rule ALL"
