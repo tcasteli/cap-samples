@@ -23,5 +23,5 @@ steps:
   cloudFoundryDeploy:
     mtaDeployParameters: "-f --version-rule ALL"
   tmsUpload:
-    nodeName: "cloud-tm"
+    nodeName: "cloud-tm-node"
     credentialsId: "cloud-tm"
