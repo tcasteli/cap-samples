@@ -16,14 +16,12 @@ stages:
     sonarExecuteScan: false
   Release:
     cloudFoundryDeploy: false
-    tmsUpload: false
+    tmsUpload: true
 steps:
   artifactPrepareVersion:
     versioningType: "cloud_noTag"
-  # npmExecuteLint:
-  #  failOnError: false
-  #npmExecuteScripts:
-  #  runScripts:
-  #  - "test"
   cloudFoundryDeploy:
     mtaDeployParameters: "-f --version-rule ALL"
+  tmsUpload:
+    nodeName: "cloud-tm"
+    credentialsId: "cloud-tm"
